@@ -18,12 +18,10 @@ public class Limpiar extends Tarea {
     public void execute() {
         robot.consumirBateria(consumo());
     }
+
     @Override
     public Integer tiempo() {
-        if(habitacion.luzEstaPrendida()){
-            return 50;
-        }
-        return 25;
+        return 180 * habitacion.getMetrosCuadrados();
     }
 
 }

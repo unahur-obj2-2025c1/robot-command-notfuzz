@@ -14,8 +14,7 @@ public class Cargar extends Tarea {
     public void execute() {
         double bateriaRestante = robot.bateriaRestante(); // en porcentaje
         int maximoMinutosParaCarga = (int)(bateriaRestante * 1.25);
-
-        // Si pidió más de lo necesario, se ajusta
+        
         if (minutos > maximoMinutosParaCarga) {
             minutos = maximoMinutosParaCarga;
         }

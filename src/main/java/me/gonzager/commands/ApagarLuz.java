@@ -24,6 +24,11 @@ public class ApagarLuz extends Tarea {
 
     @Override
     public Integer tiempo() {
-        return 180 * habitacion.getMetrosCuadrados();
+        if(habitacion.luzEstaPrendida()){
+            return 50;
+        }
+        return 25;
     }
+    
+    
 }
