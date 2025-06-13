@@ -7,6 +7,10 @@ public abstract class Tarea  {
     protected Robot robot;
     protected Habitacion habitacion;
     
+    public Tarea(Robot robot, Habitacion habitacion) {
+        this.robot = robot;
+        this.habitacion = habitacion;
+    }
     public abstract Integer tiempo();
     public abstract Double consumo();
     public abstract void execute();

@@ -6,48 +6,48 @@ import me.gonzager.excepciones.RobotException;
 
 
 public class Robot {
-    private Habitacion habitacion;
     private Double bateria = 100.00d;
-    private ArrayList<Tarea> tareasARealizar;
+    private ArrayList<Tarea> tareasARealizar = new ArrayList<Tarea>();
     private ArrayList<Tarea> tareasRealizadas = new ArrayList<Tarea>();
     
-    public void agregartarea(Tarea tarea){
+    public ArrayList<Tarea> getTareasARealizar() {
+        return tareasARealizar;
+    }
+
+    public void agregarTarea(Tarea tarea){
         tareasARealizar.add(tarea);
     }
 
-    public Robot(Habitacion habitacion, ArrayList<Tarea> tareasARealizar) {
-        this.habitacion = habitacion;
-        this.tareasARealizar = tareasARealizar;
+    public Robot() {
     }
 
     public void realizarTareas(){
         for (Tarea tarea : tareasARealizar) {
         tarea.execute();                
-        tareasRealizadas.add(tarea);   
-    }
-    }
+        tareasRealizadas.add(tarea);  
+        }
+        tareasARealizar.clear();
+   }
 
     public ArrayList<Tarea> getTareasRealizadas() {
         return tareasRealizadas;
     }
 
-    public void agregarTareaRealizada(Tarea tarea){
-        tareasRealizadas.add(tarea);
-    }
-    public Habitacion geHabitacion(){
-        return habitacion;
-    }
     public Double getBateria(){
         return bateria;
     }
     
     public void cargarBateria(Integer minutos) {
-        bateria = Math.min(100.00d, bateria + minutos * 0.80d);
+        bateria = Math.min(100.0, bateria + minutos * 0.80);
     }
 
     public Integer tiempoTareas(){
         Integer nuevoTiempoTareas = tareasRealizadas.stream().mapToInt(t -> t.tiempo()).sum();
         return nuevoTiempoTareas;    
+    }
+
+    public Integer tiempoParaHacerTareas(){
+        return (int)((getBateria() * 125) * 60);
     }
     
     public Double bateriaRestante(){
@@ -58,7 +58,7 @@ public class Robot {
         if(bateria < bateriaAConsumir){
             throw new RobotException("Batería insuficiente para realizar esta acción");
         }
-        bateria -= bateria;
+        bateria -= bateriaAConsumir;
     }
 
 }

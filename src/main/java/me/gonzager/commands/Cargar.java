@@ -1,17 +1,27 @@
 package me.gonzager.commands;
 
+import me.gonzager.domain.Habitacion;
 import me.gonzager.domain.Robot;
 
 public class Cargar extends Tarea {
     private Integer minutos;
+    private Integer tiempo;
+    public Cargar(Robot robot, Habitacion habitacion, Integer minutos) {
+        super(robot, habitacion);
+        this.minutos = minutos;
+    }
     @Override
     public void execute() {
-        int tiempoRestante = (int)(robot.bateriaRestante() * 1.25);
-        if(minutos > tiempoRestante){
-            minutos = tiempoRestante;
+        double bateriaRestante = robot.bateriaRestante(); // en porcentaje
+        int maximoMinutosParaCarga = (int)(bateriaRestante * 1.25);
+
+        // Si pidió más de lo necesario, se ajusta
+        if (minutos > maximoMinutosParaCarga) {
+            minutos = maximoMinutosParaCarga;
         }
-        robot.consumirBateria(consumo());
-        this.robot.cargarBateria(minutos);
+
+        robot.cargarBateria(minutos);
+        tiempo = minutos * 60;
 
     }
     @Override
@@ -20,7 +30,7 @@ public class Cargar extends Tarea {
     }
     @Override
     public Integer tiempo() {
-        return 0;
+        return tiempo;
     }
  
 

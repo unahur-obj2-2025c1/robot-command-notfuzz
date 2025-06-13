@@ -4,7 +4,10 @@ import me.gonzager.domain.Habitacion;
 import me.gonzager.domain.Robot;
 
 public class ApagarLuz extends Tarea {
-    
+    public ApagarLuz(Robot robot, Habitacion habitacion) {
+        super(robot, habitacion);
+    }
+
     @Override
     public Double consumo() {
         if(habitacion.luzEstaPrendida()){

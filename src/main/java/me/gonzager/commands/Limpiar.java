@@ -5,6 +5,10 @@ import me.gonzager.domain.Robot;
 
 public class Limpiar extends Tarea {
 
+    public Limpiar(Robot robot, Habitacion habitacion) {
+        super(robot, habitacion);
+    }
+
     @Override
     public Double consumo() {
         return (double)(habitacion.getMetrosCuadrados() * 5);
